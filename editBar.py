@@ -18,7 +18,7 @@ class EditBar(Frame):
         self.filter_button = Button(self, text="Filtruj")
         self.adjust_button = Button(self, text="Edytuj kolory i jasność")
         self.clear_button = Button(self, text="Wyczyść")
-        self.undo_button = Button(self, text="Cofnij")
+        
 
         self.load_bmp_button.bind("<ButtonRelease>", self.load_bmp_button_released)
         self.save_button.bind("<ButtonRelease>", self.save_button_released)
@@ -28,7 +28,7 @@ class EditBar(Frame):
         self.filter_button.bind("<ButtonRelease>", self.filter_button_released)
         self.adjust_button.bind("<ButtonRelease>", self.adjust_button_released)
         self.clear_button.bind("<ButtonRelease>", self.clear_button_released)
-        self.undo_button.bind("<ButtonRelease>", self.undo_button_released)
+        
         
         self.load_bmp_button.pack(side=LEFT)
         self.save_button.pack(side=LEFT)
@@ -37,7 +37,6 @@ class EditBar(Frame):
         self.crop_button.pack(side=LEFT)
         self.filter_button.pack(side=LEFT)
         self.adjust_button.pack(side=LEFT)
-        self.undo_button.pack(side=LEFT)
         self.clear_button.pack()
 
     def load_bmp_button_released(self, event):
@@ -128,21 +127,6 @@ class EditBar(Frame):
                 self.master.adjust_frame = AdjustFrame(master=self.master)
                 self.master.adjust_frame.grab_set()
     
-    def undo_button_released(self, event):
-        if self.winfo_containing(event.x_root, event.y_root) == self.undo_button:
-            if self.master.is_image_selected:
-                if self.master.is_draw_state:
-                    self.master.image_viewer.deactivate_draw()
-                if self.master.is_crop_state:
-                    self.master.image_viewer.deactivate_crop()
-                
-                self.master.previous_img = self.master.processed_image.copy()
-                self.master.image_viewer.show_image()
-                
-                
-                
-
-
     def clear_button_released(self, event):
         if self.winfo_containing(event.x_root, event.y_root) == self.clear_button:
             if self.master.is_image_selected:
