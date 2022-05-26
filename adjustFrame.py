@@ -3,16 +3,18 @@ import cv2
 
 
 class AdjustFrame(Toplevel):
-
+    """Klasa obslugujaca okno zajmujaca sie dostosywaniem koloru i jasnosci"""
     def __init__(self, master=None):
         Toplevel.__init__(self, master=master)
 
+        #definicja stanow i zmiennych
         self.brightness_value = 0
         self.previous_brightness_value = 0
 
         self.original_image = self.master.processed_image
         self.processing_image = self.master.processed_image
 
+        #label i skala do zmiany janoscii kolor RGB
         self.brightness_label = Label(self, text="Jasność")
         self.brightness_scale = Scale(self, from_=0, to_=2, length=250, resolution=0.1,
                                       orient=HORIZONTAL)
@@ -25,16 +27,20 @@ class AdjustFrame(Toplevel):
         self.b_label = Label(self, text="B")
         self.b_scale = Scale(self, from_=-100, to_=100, length=250, resolution=1,
                              orient=HORIZONTAL)
+        #przyciski - zatwierdz, widok do sprawdzenia zmian, odrzuc
         self.apply_button = Button(self, text="Zatwierdź")
         self.preview_button = Button(self, text="Widok")
         self.cancel_button = Button(self, text="Odrzuć")
 
+        #ustawienie 1 na skali jasnosci
         self.brightness_scale.set(1)
 
+        #bindy
         self.apply_button.bind("<ButtonRelease>", self.apply_button_released)
         self.preview_button.bind("<ButtonRelease>", self.show_button_release)
         self.cancel_button.bind("<ButtonRelease>", self.cancel_button_released)
 
+        #dodanie do layotu
         self.brightness_label.pack()
         self.brightness_scale.pack()
         self.r_label.pack()
@@ -46,7 +52,7 @@ class AdjustFrame(Toplevel):
         self.cancel_button.pack(side=RIGHT)
         self.preview_button.pack(side=RIGHT)
         self.apply_button.pack()
-
+    #to do tomorrow
     def apply_button_released(self, event):
         self.master.processed_image = self.processing_image
         self.close()
