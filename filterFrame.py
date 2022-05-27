@@ -25,7 +25,7 @@ class FilterFrame(Toplevel):
         self.emboss_button = Button(master=self, text="Emboss")
         self.gaussian_blur_button = Button(master=self, text="Gaussian Blur")
         self.median_blur_button = Button(master=self, text="Median Blur")
-        self.flip_button = Button(master=self, text ="Obróć o zadana ilosc stopni")
+        self.flip_button = Button(master=self, text ="Obróć o 90 stopni")
         self.cancel_button = Button(master=self, text="Odrzuć")
         self.apply_button = Button(master=self, text="Zatwierdź")
 
@@ -92,16 +92,8 @@ class FilterFrame(Toplevel):
     #funkcje zajmujace sie faktyczna zmiana obrazu
     #todo flip_img
     def flip_img(self):
-        self.frame_flip = tk.Tk()
-        self.frame_flip.title("Obrót")
-        self.frame_flip.geometry('400x200')
-        self.input_angles = tk.Text(self.frame_flip, height=5, width=20)
-        self.input_angles.pack()
-        input = (self.input_angles.get("1.0", END))
-        (cX, cY) = (self.w // 2, self.h // 2)
-        M = cv2.getRotationMatrix2D((cX, cY), input, 1.0)
-        self.filtered_image = cv2.warpAffine(self.filtered_image, M, (self.w, self.h))
-        self.show_image()
+        """Funkcja obracajaca zdjecie o 90 stopni."""
+        self.filtered_image = cv2.rotate(self.original_image,cv2.cv2.ROTATE_90_CLOCKWISE)
 
     def show_image(self):
         """Funkcja pokazujaca zedytowane zdjecie"""
