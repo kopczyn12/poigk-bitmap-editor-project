@@ -89,7 +89,7 @@ class ImageViewer(Frame):
 
     def deactivate_draw(self):
         """Funkcja deaktywujaca rysowanie"""
-        #binding 
+        #unbinding 
         self.canvas.unbind("<ButtonPress>")
         self.canvas.unbind("<B1-Motion>")
 

@@ -10,13 +10,12 @@ class FilterFrame(Toplevel):
     def __init__(self, master=None):
         Toplevel.__init__(self, master=master)
 
-        #to do
+        #deficja stanow i zmienych
         self.frame_flip = None
         self.original_image = self.master.processed_image
         self.filtered_image = None
-        self.h = self.original_image[0]
-        self.w = self.original_image[1]
-        self.input_angles = None
+       
+        
 
         #definicja przyciskow
         self.negative_button = Button(master=self, text="Negatyw")
@@ -90,7 +89,6 @@ class FilterFrame(Toplevel):
         self.close()
 
     #funkcje zajmujace sie faktyczna zmiana obrazu
-    #todo flip_img
     def flip_img(self):
         """Funkcja obracajaca zdjecie o 90 stopni."""
         self.filtered_image = cv2.rotate(self.original_image,cv2.cv2.ROTATE_90_CLOCKWISE)
