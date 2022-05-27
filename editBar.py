@@ -44,6 +44,7 @@ class EditBar(Frame):
 #Tu zaczyna sie definiowanie funkcji oblugujace klikniecie przyciskow (eventy).
 
     def load_bmp_button_released(self, event):
+        """Funkcja wczytujaca zdjecie"""
         if self.winfo_containing(event.x_root, event.y_root) == self.load_bmp_button: #sprawdzenie, czy kliknelismy dobry przycisk, aby miec pewnosc ze klikajac odpowiedni przycisk zdarzy sie odpowiedni event
             if self.master.is_draw_state:#sprawdzenie czy rysujemy, jesli  tak to wylaczamy rysowanie bo wczytujemy nowy obraz. Podobnie ponizej z przycinaniem.
                 self.master.image_viewer.deactivate_draw()
@@ -63,6 +64,7 @@ class EditBar(Frame):
                 self.master.is_image_selected = True
 
     def save_button_released(self, event):
+        """Funkcja zapisuajca zdjecie"""
         if self.winfo_containing(event.x_root, event.y_root) == self.save_button: #ten sam warunek co powyzej.
             if self.master.is_image_selected:
                 if self.master.is_crop_state:
@@ -76,6 +78,7 @@ class EditBar(Frame):
                 cv2.imwrite(image_filename, save_image)
 
     def save_as_button_released(self, event):
+        """Funckja zapisujaca zdjecie jako..."""
         if self.winfo_containing(event.x_root, event.y_root) == self.save_as_button: #ten sam warunek co wyzej
             if self.master.is_image_selected:
                 if self.master.is_draw_state:
@@ -98,6 +101,7 @@ class EditBar(Frame):
                 self.master.filename = filename
 
     def draw_button_released(self, event):
+        """Funkcja odpowiadajaca za wlaczenie rysowania"""
         if self.winfo_containing(event.x_root, event.y_root) == self.draw_button: #ten sam warunek co wyzej
             if self.master.is_image_selected:
                 if self.master.is_crop_state:
@@ -109,6 +113,7 @@ class EditBar(Frame):
                     self.master.image_viewer.activate_draw()
 
     def crop_button_released(self, event):
+        """"Funkcja odpowiadajaca za wlaczenie przycinania"""
         if self.winfo_containing(event.x_root, event.y_root) == self.crop_button: #to samo co wyzej
             if self.master.is_image_selected:
                 if self.master.is_draw_state:
@@ -120,6 +125,7 @@ class EditBar(Frame):
                     self.master.image_viewer.activate_crop()
 
     def filter_button_released(self, event):
+        """Funkcja odpowiadajaca za wlaczenie okna pozwalajacego na filtrowanie zdjecia"""
         if self.winfo_containing(event.x_root, event.y_root) == self.filter_button: #to samo co wyzej
             if self.master.is_image_selected:
                 if self.master.is_draw_state:
@@ -133,6 +139,7 @@ class EditBar(Frame):
                 self.master.filter_frame.grab_set()
 
     def adjust_button_released(self, event):
+        """Funkcja odpowiadajaca za wlaczenie okna pozwalajacego na edycje kolorw i jasnosci zdjecia"""
         #wszystko analogicznie jak powyzej tylko dla okna adjustframe
         if self.winfo_containing(event.x_root, event.y_root) == self.adjust_button:
             if self.master.is_image_selected:
@@ -145,6 +152,7 @@ class EditBar(Frame):
                 self.master.adjust_frame.grab_set()
     
     def clear_button_released(self, event):
+        """Funkcja cofajaca wprowadzone zmiany"""
         if self.winfo_containing(event.x_root, event.y_root) == self.clear_button: #ten sam warunek co powyzej
             if self.master.is_image_selected:
                 if self.master.is_draw_state:

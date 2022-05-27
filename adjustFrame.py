@@ -52,12 +52,14 @@ class AdjustFrame(Toplevel):
         self.cancel_button.pack(side=RIGHT)
         self.preview_button.pack(side=RIGHT)
         self.apply_button.pack()
-    #to do tomorrow
-    def apply_button_released(self, event):
+    
+    def apply_button_released(self, event):#funkcja obslugujaca zatwierdzenie zmian
+        """Funkcja zatwierdzajaca zmiany w oknie adjustFrame"""
         self.master.processed_image = self.processing_image
         self.close()
 
-    def show_button_release(self, event):
+    def show_button_release(self, event):#funkcja umozliwiajaca widok zmian i aplikacje
+        """Funkcja pokazujaca wprowadzone zmiany w oknie adjustFrame"""
         self.processing_image = cv2.convertScaleAbs(self.original_image, alpha=self.brightness_scale.get())
         b, g, r = cv2.split(self.processing_image)
 
@@ -71,12 +73,15 @@ class AdjustFrame(Toplevel):
         self.processing_image = cv2.merge((b, g, r))
         self.show_image(self.processing_image)
 
-    def cancel_button_released(self, event):
+    def cancel_button_released(self, event):#odrzucenie zmian
+        """Funkcja odrzucajaca wprowadzone zmiany w oknie adjustFrame"""
         self.close()
 
-    def show_image(self, img=None):
+    def show_image(self, img=None):#pokazanie zdjecia
+        """Funkcja pokazujaca zdjecie"""
         self.master.image_viewer.show_image(img=img)
 
-    def close(self):
+    def close(self):#zamkniecie okna
+        """Funkcja zamykajaca okno"""
         self.show_image()
         self.destroy()
