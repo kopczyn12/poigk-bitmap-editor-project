@@ -11,10 +11,11 @@ class App(tk.Tk):
         #zmienne - sciezki, stany
         self.filename = ""
         self.org_image = None
-        self.processed_img = None
+        self.processed_image = None
         self.is_img_selected = None
         self.is_draw_state = None
         self.is_crop_state = None
+       
 
         #dwa pozostale okna
         self.filter_frame = None
@@ -22,7 +23,7 @@ class App(tk.Tk):
         
         #tytul okna
         self.title("Edytor obrazów")
-        
+       
         #elementy aplikacji - editbar i image viewer
         self.editbar = EditBar(master=self)
         #separator dzielacy 2 pola, edit bar i image viewer.

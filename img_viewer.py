@@ -4,7 +4,7 @@ import cv2
 
 #tkinter potrzebuje PIL aby pokazac obraz (odpowiedni typ) na swoim canvasie.
 class ImageViewer(Frame):
-    """Klasa implemetujaca image viewer frame, odpowiedzialna odtarzanie obrazu"""
+    """Klasa implemetujaca image viewer frame, odpowiedzialna odtwarzanie obrazu"""
 
     def __init__(self, master=None):
 
@@ -22,6 +22,7 @@ class ImageViewer(Frame):
         self.crop_end_y = 0
         self.draw_ids = list()
         self.rectangle_id = 0
+  
         #zmienna do zmieniania rozmiaru zdjecia
         self.ratio = 0
 
@@ -34,10 +35,10 @@ class ImageViewer(Frame):
 
         #przypisanie zdjecia jezeli nie jest podane
         if img is None:
-            image = self.master.processed_image.copy()
+            image = self.master.processed_image.copy()            
         else:
             image = img
-
+            
         #zmiana do RGB, poniewaz opencv przyjmuje zdjecia w formacie BGR
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         #wyciagniecie inf. ze zdjecia - wysokosci, szerokosci, kanalow kolorow
@@ -85,8 +86,8 @@ class ImageViewer(Frame):
         self.canvas.bind("<ButtonRelease>", self.end_crop)
 
         #zmiana stanu
-        self.master.is_crop_state = True
-
+        self.master.is_crop_state = True 
+    
     def deactivate_draw(self):
         """Funkcja deaktywujaca rysowanie"""
         #unbinding 
@@ -177,7 +178,7 @@ class ImageViewer(Frame):
 
         #nadpisanie
         self.master.processed_image = self.master.processed_image[y, x]
-
+        
         #pokazanie zdjecia
         self.show_image()
     

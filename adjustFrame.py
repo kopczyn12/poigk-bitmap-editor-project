@@ -13,7 +13,7 @@ class AdjustFrame(Toplevel):
 
         self.original_image = self.master.processed_image
         self.processing_image = self.master.processed_image
-
+        
         #label i skala do zmiany janoscii kolor RGB
         self.brightness_label = Label(self, text="Jasność")
         self.brightness_scale = Scale(self, from_=0, to_=2, length=250, resolution=0.1,
@@ -55,12 +55,18 @@ class AdjustFrame(Toplevel):
     
     def apply_button_released(self, event):#funkcja obslugujaca zatwierdzenie zmian
         """Funkcja zatwierdzajaca zmiany w oknie adjustFrame"""
+     
         self.master.processed_image = self.processing_image
+     
         self.close()
 
     def show_button_release(self, event):#funkcja umozliwiajaca widok zmian i aplikacje
         """Funkcja pokazujaca wprowadzone zmiany w oknie adjustFrame"""
+      
         self.processing_image = cv2.convertScaleAbs(self.original_image, alpha=self.brightness_scale.get())
+
+        #rozdzielenie kolorow w celu mozliwosci edycji wartosci pojedynczych barw
+     
         b, g, r = cv2.split(self.processing_image)
 
         for b_value in b:
@@ -70,7 +76,11 @@ class AdjustFrame(Toplevel):
         for r_value in r:
             cv2.add(r_value, self.r_scale.get(), r_value)
 
+        #zlaczenie edytowanych kolorow
+       
         self.processing_image = cv2.merge((b, g, r))
+        
+    
         self.show_image(self.processing_image)
 
     def cancel_button_released(self, event):#odrzucenie zmian
