@@ -1,3 +1,3 @@
 # poigk-bitmap-editor-project
-Student's project
+To run photoshop, type in the terminal in proper workspace python3 init.py
 
